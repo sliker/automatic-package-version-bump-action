@@ -1,0 +1,16 @@
+name: Bump package version
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v4'
+      - name: 'Bump to next version'
+        uses: ./
