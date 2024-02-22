@@ -1,21 +1,22 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
+  "name": "automatic-package-version-bump-action",
+  "description": "Automatically bump the package version following semantic versioning based on the type from the PR title",
   "version": "0.0.0",
-  "author": "",
+  "author": "sliker",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/sliker/automatic-package-version-bump-action#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/sliker/automatic-package-version-bump-action.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/sliker/automatic-package-version-bump-action/issues"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "Bump Package Version"
   ],
   "exports": {
     ".": "./dist/index.js"
