@@ -14,6 +14,10 @@ const extractType = require('./utils/extract-type')
  */
 async function run() {
   try {
+    const pullRequest = github.context.payload.pull_request
+    if (!pullRequest) {
+      throw new Error('Pull request not found')
+    }
     // Get PR title from Github context
     const prTitle = github.context.payload.pull_request.title
     // Check if PR type is in the title
