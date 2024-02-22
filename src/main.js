@@ -40,17 +40,21 @@ async function run() {
     packageFile.set('version', nextVersion)
     packageFile.save()
 
-    console.log('PR', pullRequest)
-    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
-    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
-    await exec(`git config user.email zero.blend@gmail.com`)
-    await exec(`git config user.name "Automatic Version Bump"`)
     // Commit the updated package json
+    await exec('git remote -v')
+
     await exec('git add package.json')
+    await exec('git pull')
     await exec(
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
-    await exec('git push origin')
+
+    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
+    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
+    await exec(`git config user.name "Automatic Version Bump"`)
+    await exec(`git config user.email zero.blend@gmail.com`)
+
+    await exec(`git push origin ${pullRequest.head.ref}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
