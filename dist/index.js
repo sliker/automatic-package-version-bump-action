@@ -30973,8 +30973,12 @@ const extractType = __nccwpck_require__(7145)
  */
 async function run() {
   try {
+    const pullRequest = github.context.payload.pull_request
+    if (!pullRequest) {
+      throw new Error('Pull request not found')
+    }
     // Get PR title from Github context
-    const prTitle = github.context.payload.pull_request.title
+    const prTitle = pullRequest.title
     // Check if PR type is in the title
     const titleType = extractType(prTitle)
     if (!titleType) {
@@ -30990,17 +30994,13 @@ async function run() {
     const packageVersion = packageFile.get('version')
     console.log('Current version:', packageVersion)
     // Get the next version based on the type of changes
-    const nextVersion = getNextVersion(packageVersion, type)
     console.log('Updating package.json to version:', nextVersion)
+    const nextVersion = getNextVersion(packageVersion, type)
     packageFile.set('version', nextVersion)
     packageFile.save()
 
-    await exec(
-      `git config user.email ${github.event.pull_request.merged_by.login}`
-    )
-    await exec(
-      `git config user.email ${github.event.pull_request.merged_by.email}`
-    )
+    await exec(`git config user.email ${pullRequest.merged_by.login}`)
+    await exec(`git config user.email ${pullRequest.merged_by.email}`)
     // Commit the updated package json
     await exec('git add package.json')
     await exec(

@@ -35,12 +35,10 @@ async function run() {
     const packageVersion = packageFile.get('version')
     console.log('Current version:', packageVersion)
     // Get the next version based on the type of changes
+    console.log('Updating package.json to version:', nextVersion)
     const nextVersion = getNextVersion(packageVersion, type)
     packageFile.set('version', nextVersion)
     packageFile.save()
-    console.log('Updating package.json to the version:', nextVersion)
-
-    console.log('pull_request', pullRequest)
 
     await exec(`git config user.email ${pullRequest.merged_by.login}`)
     await exec(`git config user.email ${pullRequest.merged_by.email}`)
