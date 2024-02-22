@@ -35,8 +35,8 @@ async function run() {
     const packageVersion = packageFile.get('version')
     console.log('Current version:', packageVersion)
     // Get the next version based on the type of changes
-    console.log('Updating package.json to version:', nextVersion)
     const nextVersion = getNextVersion(packageVersion, type)
+    console.log('Updating package.json to version:', nextVersion)
     packageFile.set('version', nextVersion)
     packageFile.save()
 
