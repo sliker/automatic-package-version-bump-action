@@ -41,10 +41,10 @@ async function run() {
     packageFile.save()
 
     await exec(
-      `git config user.email ${github.event.pull_request.merged_by.login}`
+      `git config user.email ${github.context.payload.pull_request.merged_by.login}`
     )
     await exec(
-      `git config user.email ${github.event.pull_request.merged_by.email}`
+      `git config user.email ${github.context.payload.pull_request.merged_by.email}`
     )
     // Commit the updated package json
     await exec('git add package.json')
