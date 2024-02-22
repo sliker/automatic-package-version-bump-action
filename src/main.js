@@ -38,7 +38,7 @@ async function run() {
     const nextVersion = getNextVersion(packageVersion, type)
     packageFile.set('version', nextVersion)
     packageFile.save()
-    console.log('Updating package.json to version:', nextVersion)
+    console.log('Updating package.json to the version:', nextVersion)
 
     console.log('pull_request', pullRequest)
 
