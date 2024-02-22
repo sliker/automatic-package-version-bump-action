@@ -30989,6 +30989,13 @@ async function run() {
     if (!type) {
       throw new Error('Invalid PR type')
     }
+    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
+    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
+    await exec(`git config --global user.name "Automatic Version Bump"`)
+    await exec(`git config --global user.email zero.blend@gmail.com`)
+
+    await exec(`git pull origin ${pullRequest.head.ref}`)
+
     // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')
     const packageVersion = packageFile.get('version')
@@ -30999,18 +31006,12 @@ async function run() {
     packageFile.set('version', nextVersion)
     packageFile.save()
 
-    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
-    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
-    await exec(`git config --global user.name "Automatic Version Bump"`)
-    await exec(`git config --global user.email zero.blend@gmail.com`)
-
     // Commit the updated package json
     await exec('git add package.json')
     await exec(
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
-    await exec('git pull origin HEAD:${pullRequest.head.ref}')
     await exec(`git push origin HEAD:${pullRequest.head.ref}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
