@@ -19,7 +19,7 @@ async function run() {
       throw new Error('Pull request not found')
     }
     // Get PR title from Github context
-    const prTitle = github.context.payload.pull_request.title
+    const prTitle = pullRequest.title
     // Check if PR type is in the title
     const titleType = extractType(prTitle)
     if (!titleType) {
@@ -40,12 +40,10 @@ async function run() {
     packageFile.set('version', nextVersion)
     packageFile.save()
 
-    await exec(
-      `git config user.email ${github.context.payload.pull_request.merged_by.login}`
-    )
-    await exec(
-      `git config user.email ${github.context.payload.pull_request.merged_by.email}`
-    )
+    console.log('pull_request', pullRequest)
+
+    await exec(`git config user.email ${pullRequest.merged_by.login}`)
+    await exec(`git config user.email ${pullRequest.merged_by.email}`)
     // Commit the updated package json
     await exec('git add package.json')
     await exec(
