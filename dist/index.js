@@ -31000,10 +31000,7 @@ async function run() {
     packageFile.save()
 
     // Commit the updated package json
-    await exec('git remote -v')
-
     await exec('git add package.json')
-    await exec('git pull')
     await exec(
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
@@ -31013,7 +31010,7 @@ async function run() {
     await exec(`git config user.name "Automatic Version Bump"`)
     await exec(`git config user.email zero.blend@gmail.com`)
 
-    await exec(`git push origin ${pullRequest.head.ref}`)
+    await exec(`git push origin -u ${pullRequest.head.ref}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
