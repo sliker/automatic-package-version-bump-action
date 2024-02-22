@@ -30999,16 +30999,16 @@ async function run() {
     packageFile.set('version', nextVersion)
     packageFile.save()
 
+    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
+    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
+    await exec(`git config --global user.name "Automatic Version Bump"`)
+    await exec(`git config --global user.email zero.blend@gmail.com`)
+
     // Commit the updated package json
     await exec('git add package.json')
     await exec(
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
-
-    // await exec(`git config user.name ${pullRequest.merged_by.login}`)
-    // await exec(`git config user.email ${pullRequest.merged_by.email}`)
-    await exec(`git config --global user.name "Automatic Version Bump"`)
-    await exec(`git config --global user.email zero.blend@gmail.com`)
 
     await exec(`git push origin -u ${pullRequest.head.ref}`)
   } catch (error) {
