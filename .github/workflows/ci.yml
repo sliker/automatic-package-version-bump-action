@@ -29,6 +29,8 @@ jobs:
           cache: npm
 
       - name: Install Dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: npm-ci
         run: npm ci
 

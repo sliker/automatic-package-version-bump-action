@@ -30998,7 +30998,8 @@ async function run() {
 
     await exec('git branch --show-current')
     await exec('git config --global pull.rebase true')
-    await exec(`git pull origin ${querystring.escape(pullRequest.head.ref)}`)
+    const branch = querystring.escape(pullRequest.head.ref)
+    await exec(`git pull origin ${branch}`)
 
     // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')
@@ -31019,7 +31020,7 @@ async function run() {
     // await exec('git fetch origin')
     // await exec(`git rebase origin/${pullRequest.head.ref}`)
 
-    await exec(`git push origin HEAD:${pullRequest.head.ref}`)
+    await exec(`git push origin HEAD:${branch}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
