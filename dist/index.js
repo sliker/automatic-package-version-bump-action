@@ -31000,7 +31000,7 @@ async function run() {
 
     await exec('git config --global pull.rebase true')
 
-    const branch = pullRequest.head.ref
+    const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
 
     // If the PR title matches the expected pattern, read the package json version
