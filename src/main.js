@@ -60,7 +60,7 @@ async function run() {
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
-    await exec(`git push origin HEAD:${branch}`)
+    await exec(`git push origin ${branch}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
