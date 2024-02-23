@@ -1,0 +1,25 @@
+name: Bump package version
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+permissions:
+  contents: read
+
+jobs:
+  bump:
+    if: github.event.pull_request.merged == true
+    name: Bump package version
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      statuses: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump to next version
+        uses: ./

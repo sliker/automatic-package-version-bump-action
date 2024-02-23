@@ -1,9 +1,9 @@
 {
   "name": "automatic-package-version-bump-action",
   "description": "Automatically bump the package version following semantic versioning based on the type from the PR title",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "author": "sliker",
-  "private": true,
+  "private": false,
   "homepage": "https://github.com/sliker/automatic-package-version-bump-action#readme",
   "repository": {
     "type": "git",
@@ -64,7 +64,10 @@
     ]
   },
   "dependencies": {
-    "@actions/core": "^1.10.1"
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.0",
+    "edit-json-file": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
