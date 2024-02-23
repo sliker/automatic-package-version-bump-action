@@ -53,6 +53,11 @@ async function run() {
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
+    await exec('git branch --show-current')
+    // await exec('git fetch origin')
+    // await exec(`git rebase origin/${pullRequest.head.ref}`)
+
+    await exec('git config --global pull.rebase true')
     await exec(`git push origin HEAD:${pullRequest.head.ref}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
