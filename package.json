@@ -1,7 +1,7 @@
 {
   "name": "automatic-package-version-bump-action",
-  "description": "Automatically bump the package version following semantic versioning based on the type from the PR title",
-  "version": "0.2.0",
+  "description": "Automatically bump the package version following semantic versioning based on the type from the PR title.",
+  "version": "0.2.2",
   "author": "sliker",
   "private": false,
   "homepage": "https://github.com/sliker/automatic-package-version-bump-action#readme",
@@ -75,7 +75,7 @@
     "@babel/preset-env": "^7.23.9",
     "@vercel/ncc": "^0.38.1",
     "babel-preset-jest": "^29.6.3",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-github": "^4.10.1",
     "eslint-plugin-jest": "^27.9.0",
     "jest": "^29.7.0",

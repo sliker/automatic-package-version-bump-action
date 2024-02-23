@@ -1,5 +1,3 @@
-const querystring = require('node:querystring')
-
 const core = require('@actions/core')
 const github = require('@actions/github')
 const { exec } = require('@actions/exec')
@@ -43,7 +41,7 @@ async function run() {
 
     await exec('git config --global pull.rebase true')
 
-    const branch = querystring.escape(pullRequest.head.ref)
+    const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
 
     // If the PR title matches the expected pattern, read the package json version
@@ -62,7 +60,8 @@ async function run() {
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
-    await exec(`git push origin HEAD:${branch}`)
+    // TODO: add validation to when use force push. Code error: GH006
+    await exec(`git push origin ${branch}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)

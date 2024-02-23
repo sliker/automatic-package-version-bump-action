@@ -30957,8 +30957,6 @@ function wrappy (fn, cb) {
 /***/ 1713:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const querystring = __nccwpck_require__(9630)
-
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
 const { exec } = __nccwpck_require__(1514)
@@ -31002,7 +31000,7 @@ async function run() {
 
     await exec('git config --global pull.rebase true')
 
-    const branch = querystring.escape(pullRequest.head.ref)
+    const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
 
     // If the PR title matches the expected pattern, read the package json version
@@ -31021,7 +31019,8 @@ async function run() {
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
-    await exec(`git push origin HEAD:${branch}`)
+    // TODO: add validation to when use force push. Code error: GH006
+    await exec(`git push origin ${branch}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
@@ -31252,14 +31251,6 @@ module.exports = require("net");
 
 "use strict";
 module.exports = require("node:events");
-
-/***/ }),
-
-/***/ 9630:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("node:querystring");
 
 /***/ }),
 
