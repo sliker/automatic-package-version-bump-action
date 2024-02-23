@@ -41,13 +41,6 @@ jobs:
           node-version-file: .node-version
           cache: npm
 
-      - name: Configure npm authentication for GitHub Packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> $HOME/.npmrc
-          npm config get registry
-
       - name: Install Dependencies
         id: install
         run: npm ci --verbose
