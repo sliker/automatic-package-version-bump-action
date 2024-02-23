@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Dependencies
         id: install
-        run: npm ci --verbose
+        run: npm ci
 
       - name: Build dist/ Directory
         id: build
