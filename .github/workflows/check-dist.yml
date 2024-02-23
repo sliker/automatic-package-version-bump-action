@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Dependencies
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: install
         run: npm ci
 
