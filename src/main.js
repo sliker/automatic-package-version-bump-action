@@ -1,3 +1,5 @@
+const querystring = require('node:querystring')
+
 const core = require('@actions/core')
 const github = require('@actions/github')
 const { exec } = require('@actions/exec')
@@ -37,7 +39,7 @@ async function run() {
 
     await exec('git branch --show-current')
     await exec('git config --global pull.rebase true')
-    await exec(`git pull origin ${pullRequest.head.ref}`)
+    await exec(`git pull origin ${querystring.escape(pullRequest.head.ref)}`)
 
     // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')

@@ -30957,6 +30957,8 @@ function wrappy (fn, cb) {
 /***/ 1713:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
+const querystring = __nccwpck_require__(9630)
+
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
 const { exec } = __nccwpck_require__(1514)
@@ -30996,7 +30998,7 @@ async function run() {
 
     await exec('git branch --show-current')
     await exec('git config --global pull.rebase true')
-    await exec(`git pull origin ${pullRequest.head.ref}`)
+    await exec(`git pull origin ${querystring.escape(pullRequest.head.ref)}`)
 
     // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')
@@ -31248,6 +31250,14 @@ module.exports = require("net");
 
 "use strict";
 module.exports = require("node:events");
+
+/***/ }),
+
+/***/ 9630:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:querystring");
 
 /***/ }),
 
