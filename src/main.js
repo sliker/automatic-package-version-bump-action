@@ -60,8 +60,8 @@ async function run() {
       `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
     )
 
-    // TODO: add validation to when use force push
-    await exec(`git push --force origin ${branch}`)
+    // TODO: add validation to when use force push. Code error: GH006
+    await exec(`git push origin ${branch}`)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
