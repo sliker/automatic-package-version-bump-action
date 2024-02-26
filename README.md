@@ -20,7 +20,7 @@ type: <description>
 
 Where:
 
-<type> can be one of the following:
+`<type>` can be one of the following:
 
 **Patches**:
 
@@ -43,7 +43,7 @@ Where:
 
 - !: A breaking change
 
-<description> of the change. Example pull request titles:
+`<description>` of the change. Example pull request titles:
 
 - [feat] Add login functionality
 - feat: Add login functionality
