@@ -4,6 +4,17 @@ description:
   the type from the PR title'
 author: 'David Velásquez'
 
+inputs:
+  patches:
+    description: 'List of patches types'
+    default: 'fix, docs, style, refactor, perf, test, chore, build, ci, revert'
+  minor:
+    description: 'List of minor types'
+    default: 'feat'
+  major:
+    description: 'List of major types'
+    default: '!'
+
 runs:
   using: node20
   main: dist/index.js

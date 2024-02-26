@@ -23,4 +23,24 @@ describe('getType', () => {
   it('should return undefined when the type is not valid', () => {
     expect(getType('invalid')).toBeUndefined()
   })
+
+  it('should return patch when is a custom patch type', () => {
+    const customPatches = ['custom-patch']
+    expect(getType('custom-patch', { patches: customPatches })).toBe('patch')
+    expect(getType('feat', { patches: customPatches })).toBe('minor')
+  })
+
+  it('should return minor when is a custom minor type', () => {
+    expect(getType('custom-minor', { minor: ['custom-minor'] })).toBe('minor')
+  })
+
+  it('should return major when is a custom major type', () => {
+    expect(getType('custom-major', { major: ['custom-major'] })).toBe('major')
+  })
+
+  it('should return default type when custom type is undefined', () => {
+    expect(getType('fix', { patches: undefined })).toBe('patch')
+    expect(getType('feat', { minor: undefined })).toBe('minor')
+    expect(getType('feat!', { major: undefined })).toBe('major')
+  })
 })

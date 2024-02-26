@@ -30966,6 +30966,7 @@ const editJsonFile = __nccwpck_require__(4772)
 const getType = __nccwpck_require__(8490)
 const getNextVersion = __nccwpck_require__(4454)
 const extractType = __nccwpck_require__(7145)
+const splitInput = __nccwpck_require__(5890)
 
 /**
  * The main function for the action.
@@ -30977,15 +30978,17 @@ async function run() {
     if (!pullRequest) {
       throw new Error('Pull request not found')
     }
-    // Get PR title from Github context
     const prTitle = pullRequest.title
-    // Check if PR type is in the title
     const titleType = extractType(prTitle)
     if (!titleType) {
       throw new Error('No PR type found in title')
     }
-    // Get the type of the changes
-    const type = getType(titleType)
+
+    const patches = splitInput('patches')
+    const minor = splitInput('minor')
+    const major = splitInput('major')
+
+    const type = getType(titleType, { patches, minor, major })
     if (!type) {
       throw new Error('Invalid PR type')
     }
@@ -31118,15 +31121,29 @@ module.exports = getNextVersion
 /***/ 8490:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const { patches, minor, major } = __nccwpck_require__(7648)
+const {
+  patches: patchTypes,
+  minor: minorTypes,
+  major: majorTypes
+} = __nccwpck_require__(7648)
 
 /**
  * Returns the type of the version bump according to the type.
  *
  * @param {string} type - The type of the PR
+ * @param {Object} [options] - The options object
+ * @param {string[]} [options.patches] - The custom patches
+ * @param {string[]} [options.minor] - The custom minor types
+ * @param {string[]} [options.major] - The custom major types
+ *
  * @returns {string|undefined} The type of the PR
  */
-const getType = type => {
+const getType = (type, options = {}) => {
+  const {
+    patches = patchTypes,
+    minor = minorTypes,
+    major = majorTypes
+  } = options
   if (patches.includes(type)) {
     return 'patch'
   } else if (minor.includes(type)) {
@@ -31138,6 +31155,21 @@ const getType = type => {
 }
 
 module.exports = getType
+
+
+/***/ }),
+
+/***/ 5890:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(2186)
+
+const splitInput = inputName => {
+  const input = core.getInput(inputName)
+  return input ? input.split(/\s*,\s*/) : undefined
+}
+
+module.exports = splitInput
 
 
 /***/ }),
