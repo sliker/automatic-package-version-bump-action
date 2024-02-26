@@ -27,7 +27,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Bump to next version
-        uses: sliker/automatic-package-version-bump@v0.0.1
+        uses: sliker/automatic-package-version-bump-action@v0.0.1
 ```
 
 **Protected branch**:
@@ -55,5 +55,5 @@ jobs:
           # TOKEN needs to be a PAT with repo permissions. Store it in the Repository Secrets.
           token: ${{ secrets.TOKEN }}
       - name: Bump to next version
-        uses: sliker/automatic-package-version-bump@v0.0.1
+        uses: sliker/automatic-package-version-bump-action@v0.0.1
 ```
