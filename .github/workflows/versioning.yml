@@ -26,3 +26,5 @@ jobs:
           token: ${{ secrets.GB_TOKEN }}
       - name: Bump to next version
         uses: ./
+        with:
+          minor: 'feat, feature'

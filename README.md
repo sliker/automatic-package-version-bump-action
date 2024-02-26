@@ -44,7 +44,7 @@ Where:
 
 **Patches**:
 
-- fix: A bug fix
+- fix: A bugfix
 - docs: Documentation changes
 - style: Code style changes
 - refactor: Code refactor or improvement

@@ -30987,6 +30987,9 @@ async function run() {
     const patches = splitInput('patches')
     const minor = splitInput('minor')
     const major = splitInput('major')
+    core.debug(`Custom Patches: ${patches}`)
+    core.debug(`Custom Minor: ${minor}`)
+    core.debug(`Custom Major: ${major}`)
 
     const type = getType(titleType, { patches, minor, major })
     if (!type) {
