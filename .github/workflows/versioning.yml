@@ -20,6 +20,9 @@ jobs:
       statuses: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GB_TOKEN }}
       - name: Bump to next version
         uses: ./
