@@ -7,3 +7,7 @@ author: 'David Velásquez'
 runs:
   using: node20
   main: dist/index.js
+
+branding:
+  icon: arrow-up-circle
+  color: green
