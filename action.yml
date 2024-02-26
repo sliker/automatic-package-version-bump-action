@@ -1,4 +1,4 @@
-name: 'Automathic Package Version Bump'
+name: 'Automatic Package Version Bump'
 description:
   'Automatically bump the package version following semantic versioning based on
   the type from the PR title'
