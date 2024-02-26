@@ -52,7 +52,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           # Only required to push on a protected branch.
-          # TOKEN needs to be a PAT with repo permissions. Store it in the Repository Secrets.
+          # TOKEN needs to be a PAT with repo permissions.
+          # Store it in the Repository Secrets.
           token: ${{ secrets.TOKEN }}
       - name: Bump to next version
         uses: sliker/automatic-package-version-bump-action@v0.0.1
