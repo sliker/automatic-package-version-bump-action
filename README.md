@@ -4,6 +4,26 @@ This GitHub action automates the process of updating the version property in the
 package.json file of your repository, following the semantic versioning
 convention. It triggers whenever there's a merge event to the specified branch.
 
+## Inputs
+
+### `patches`
+
+**Optional** List of patches types to replace the default ones.
+
+Default: `"fix, docs, style, refactor, perf, test, chore, build, ci, revert"`
+
+### `minor`
+
+**Optional** List minor types to replace the default ones.
+
+Default: `"feat"`
+
+### `major`
+
+**Optional** List of major types to replace the default ones.
+
+Default: `"!"`
+
 ## Usage
 
 To use this action, create a pull request with a title in the following format:
@@ -12,7 +32,7 @@ To use this action, create a pull request with a title in the following format:
 [<type>] <description>
 ```
 
-or
+Or
 
 ```text
 type: <description>
@@ -24,7 +44,7 @@ Where:
 
 **Patches**:
 
-- fix: A bug fix
+- fix: A bugfix
 - docs: Documentation changes
 - style: Code style changes
 - refactor: Code refactor or improvement

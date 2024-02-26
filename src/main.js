@@ -7,6 +7,7 @@ const editJsonFile = require('edit-json-file')
 const getType = require('./utils/get-type')
 const getNextVersion = require('./utils/get-next-version')
 const extractType = require('./utils/extract-type')
+const splitInput = require('./utils/split-input')
 
 /**
  * The main function for the action.
@@ -18,15 +19,20 @@ async function run() {
     if (!pullRequest) {
       throw new Error('Pull request not found')
     }
-    // Get PR title from Github context
     const prTitle = pullRequest.title
-    // Check if PR type is in the title
     const titleType = extractType(prTitle)
     if (!titleType) {
       throw new Error('No PR type found in title')
     }
-    // Get the type of the changes
-    const type = getType(titleType)
+
+    const patches = splitInput('patches')
+    const minor = splitInput('minor')
+    const major = splitInput('major')
+    core.debug(`Custom Patches: ${patches}`)
+    core.debug(`Custom Minor: ${minor}`)
+    core.debug(`Custom Major: ${major}`)
+
+    const type = getType(titleType, { patches, minor, major })
     if (!type) {
       throw new Error('Invalid PR type')
     }
