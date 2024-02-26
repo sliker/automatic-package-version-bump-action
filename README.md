@@ -6,6 +6,64 @@ convention. It triggers whenever there's a merge event to the specified branch.
 
 ## Usage
 
+To use this action, create a pull request with a title in the following format:
+
+```text
+[<type>] <description>
+```
+
+or
+
+```text
+type: <description>
+```
+
+Where:
+
+<type> can be one of the following:
+
+**Patches**:
+
+- fix: A bug fix
+- docs: Documentation changes
+- style: Code style changes
+- refactor: Code refactor or improvement
+- perf: Performance improvement
+- test: Adding or modifying tests
+- chore: Routine tasks or maintenance
+- build: Changes that affect the build of the app
+- ci: Changes to CI configuration scripts and files
+- revert: Reverting a commit
+
+**Minor**:
+
+- feat: A new feature
+
+**Major**:
+
+- !: A breaking change
+
+<description> of the change. Example pull request titles:
+
+- [feat] Add login functionality
+- feat: Add login functionality
+- [feat!] Deprecate old login functionality
+- [fix] Fix formatting issue in module A
+- fix: Fix formatting issue in module A
+- [chore] Update dependencies
+- [chore!] Major update on nodejs dependency
+- chore: Update dependencies
+- [docs] Update README
+- docs: Update README
+
+The action will automatically analyze the pull request title, determine the
+appropriate version bump type, and update and commit the version in the
+package.json file accordingly.
+
+Please note that this action assumes your repository follows the standard
+structure with a package.json file. Make sure to configure your workflow to
+trigger this action on the desired events, such as a merged pull request.
+
 **Non-protected branch**:
 
 ```yaml
