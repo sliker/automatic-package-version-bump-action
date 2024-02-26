@@ -1,7 +1,7 @@
 {
   "name": "automatic-package-version-bump-action",
   "description": "Automatically bump the package version following semantic versioning based on the type from the PR title.",
-  "version": "0.2.2",
+  "version": "0.0.1",
   "author": "sliker",
   "private": false,
   "homepage": "https://github.com/sliker/automatic-package-version-bump-action#readme",

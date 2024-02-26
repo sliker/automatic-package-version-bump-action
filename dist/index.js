@@ -31016,7 +31016,7 @@ async function run() {
     // Commit the updated package json
     await exec('git add package.json')
     await exec(
-      `git commit -m "Bump version from ${packageVersion} to ${nextVersion}"`
+      `git commit -m "Automatically bump version from ${packageVersion} to ${nextVersion}"`
     )
 
     // TODO: add validation to when use force push. Code error: GH006
