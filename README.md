@@ -115,7 +115,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Bump to next version
-        uses: sliker/automatic-package-version-bump-action@v0.0.1
+        uses: sliker/automatic-package-version-bump-action@v1
 ```
 
 **Protected branch**:
@@ -144,5 +144,5 @@ jobs:
           # Store it in the Repository Secrets.
           token: ${{ secrets.TOKEN }}
       - name: Bump to next version
-        uses: sliker/automatic-package-version-bump-action@v0.0.1
+        uses: sliker/automatic-package-version-bump-action@v1
 ```
