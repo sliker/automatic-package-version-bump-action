@@ -31005,7 +31005,7 @@ async function run() {
       pullRequest.merged_by?.email ||
       'automatic-package-version-bump@users.noreply.github.com'
 
-    core.debug(`Author Name: ${authorName}`)
+    core.debug(`Author Name: "${authorName}"`)
     core.debug(`Author Email: ${authorEmail}`)
 
     await exec(`git config user.name ${authorName}`)
