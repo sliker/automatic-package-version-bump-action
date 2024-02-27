@@ -30996,26 +30996,33 @@ async function run() {
       throw new Error('Invalid PR type')
     }
 
-    if (pullRequest.merged_by) {
-      await exec(`git config user.name ${pullRequest.merged_by.login}`)
-      await exec(`git config user.email ${pullRequest.merged_by.email}`)
-    } else {
-      await exec(`git config --global user.name "Automatic Version Bump"`)
-      await exec(`git config --global user.email zero.blend@gmail.com`)
-    }
+    const authorName =
+      core.getInput('commit-author-name') ||
+      pullRequest.merged_by?.login ||
+      'Automatic Version Bump'
+    const authorEmail =
+      core.getInput('commit-author-email') ||
+      pullRequest.merged_by?.email ||
+      'automatic-package-version-bump@users.noreply.github.com'
 
-    await exec('git config --global pull.rebase true')
+    core.debug(`Author Name: ${authorName}`)
+    core.debug(`Author Email: ${authorEmail}`)
+
+    await exec(`git config user.name ${authorName}`)
+    await exec(`git config user.email ${authorEmail}`)
+
+    await exec('git config pull.rebase true')
 
     const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
 
-    // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')
     const packageVersion = packageFile.get('version')
-    console.log('Current version:', packageVersion)
-    // Get the next version based on the type of changes
     const nextVersion = getNextVersion(packageVersion, type)
-    console.log('Updating package.json to version:', nextVersion)
+
+    core.info(`Current version: ${packageVersion}`)
+    core.info(`Updating package.json to version: ${nextVersion}`)
+
     packageFile.set('version', nextVersion)
     packageFile.save()
 
