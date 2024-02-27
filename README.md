@@ -1,5 +1,8 @@
 # automatic-package-version-bump
 
+[![GitHub Super-Linter](https://github.com/actions/javascript-action/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
+![CI](https://github.com/actions/javascript-action/actions/workflows/ci.yml/badge.svg)
+
 This GitHub action automates the process of updating the version property in the
 package.json file of your repository, following the semantic versioning
 convention. It triggers whenever there's a merge event to the specified branch.
