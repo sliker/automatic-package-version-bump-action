@@ -6,6 +6,16 @@ convention. It triggers whenever there's a merge event to the specified branch.
 
 ## Inputs
 
+### `commit-author-name`
+
+**Optional** Specify the name of the author for the commit. Default to the name
+of the person who merged the pull request.
+
+### `commit-author-email`
+
+**Optional** Specify the email of the author for the commit. Default to the
+email of the person who merged the pull request.
+
 ### `patches`
 
 **Optional** List of patches types to replace the default ones.

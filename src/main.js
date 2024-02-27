@@ -37,15 +37,22 @@ async function run() {
       throw new Error('Invalid PR type')
     }
 
-    if (pullRequest.merged_by) {
-      await exec(`git config user.name ${pullRequest.merged_by.login}`)
-      await exec(`git config user.email ${pullRequest.merged_by.email}`)
-    } else {
-      await exec(`git config --global user.name "Automatic Version Bump"`)
-      await exec(`git config --global user.email zero.blend@gmail.com`)
-    }
+    const authorName =
+      core.getInput('commit-author-name') ||
+      pullRequest.merged_by?.login ||
+      'Automatic Version Bump'
+    const authorEmail =
+      core.getInput('commit-author-email') ||
+      pullRequest.merged_by?.email ||
+      'automatic-package-version-bump@users.noreply.github.com'
 
-    await exec('git config --global pull.rebase true')
+    core.debug(`Author Name: ${authorName}`)
+    core.debug(`Author Email: ${authorEmail}`)
+
+    await exec(`git config user.name ${authorName}`)
+    await exec(`git config user.email ${authorEmail}`)
+
+    await exec('git config pull.rebase true')
 
     const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
