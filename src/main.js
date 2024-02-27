@@ -57,13 +57,13 @@ async function run() {
     const branch = pullRequest.base.ref
     await exec(`git pull origin ${branch}`)
 
-    // If the PR title matches the expected pattern, read the package json version
     const packageFile = editJsonFile('./package.json')
     const packageVersion = packageFile.get('version')
-    console.log('Current version:', packageVersion)
-    // Get the next version based on the type of changes
     const nextVersion = getNextVersion(packageVersion, type)
-    console.log('Updating package.json to version:', nextVersion)
+
+    core.info(`Current version: ${packageVersion}`)
+    core.info(`Updating package.json to version: ${nextVersion}`)
+
     packageFile.set('version', nextVersion)
     packageFile.save()
 
