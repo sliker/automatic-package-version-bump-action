@@ -14,7 +14,7 @@ const getNextVersion = (currentVersion, type) => {
     case 'minor':
       return `${major}.${minor + 1}.${patch}`
     case 'major':
-      return `${major + 1}.${minor}.${patch}`
+      return `${major + 1}.0.0`
     default:
       return currentVersion
   }
